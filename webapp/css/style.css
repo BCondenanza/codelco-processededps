@@ -1,0 +1,45 @@
+.subHeaderToolbar {
+    height: auto;         /* permite que crezca según el contenido */
+    min-height: 7rem;     /* altura mínima deseada */
+    justify-content: center;
+    align-content: center;
+}
+
+.mainTitle {
+    font-size: 2rem;      /* tamaño del título principal */
+    font-weight: bold;
+    text-align: center;
+    align-content: center;
+}
+
+.subTitle {
+    font-size: 1.4rem;    /* tamaño del subtítulo */
+    color: #666;
+    text-align: center;
+    align-content: center;
+}
+
+.subTitleGray {
+    color: gray !important;
+    font-weight: normal;
+}
+
+.subTitleBlack {
+    color: black;
+    font-weight: normal;
+}
+
+.filterBar{
+    margin-top:80px !important;
+}
+
+.listItemPadding {
+    padding: 1rem; /* espacio interno del item */
+}
+
+.linkText {
+    color: #0a6ed1;
+    cursor: pointer;
+    font-size: 0.9rem;
+    margin-top: 0.2rem;
+}

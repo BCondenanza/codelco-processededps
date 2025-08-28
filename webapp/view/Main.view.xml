@@ -1,0 +1,140 @@
+<mvc:View
+    controllerName="codelco.processededps.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+>
+    <Page id="page" showHeader="false">
+            
+            <subHeader>
+                <Toolbar class="subHeaderToolbar">
+                    <VBox justifyContent="Center" alignItems="Center" class="subHeaderVBox">
+
+                        <!-- Título -->
+                        <Title text="PROPUESTAS DE ESTADO DE PAGO PROCESADAS" class="mainTitle"/>
+                        
+                        <!-- Subtítulo -->
+                        <HBox justifyContent="Center" alignItems="Center" fitContainer="true" class="sapUiSmallMarginTop">
+                            <Title text="Mis propuestas" class="subTitleGray"/>
+                            <Title text=": Nombre empresa contratista" class="subTitleBlack"/>
+                        </HBox>
+                    </VBox>
+                </Toolbar>
+            </subHeader>
+            
+            <VBox fitContainer="true">
+            <fb:FilterBar
+                id="filterbar"
+                persistencyKey="myFilterBarPersistenceKey"
+                useToolbar="false"
+                search=".onSearch"
+                clear=".onClear"
+                showGoOnFB="false"
+                class="filterBar sapUiLargeMarginTop">
+
+                <fb:filterGroupItems>
+                    <fb:FilterGroupItem 
+                        name="FechaCreacion" 
+                        label="Fecha de creación" 
+                        groupName="Group1"
+                        id="7" 
+                        visibleInFilterBar="true">
+                        <fb:control>
+                            <DateRangeSelection id="Date" displayFormat="yyyy/MM/dd" />
+                        </fb:control>
+                    </fb:FilterGroupItem>
+
+
+                    <fb:FilterGroupItem
+                        groupName="__$INTERNAL$"
+                        name="Estado"
+                        label="Estado"
+                        visibleInFilterBar="true">
+                        <fb:control>
+                            <ComboBox id="EstadoCB" selectedKey="Todo">
+                                <core:Item key="Todo" text="Todo" />
+                                <core:Item key="Nuevo" text="Nuevo" />
+                                <core:Item key="Confirmado" text="Confirmado" />
+                                <core:Item key="Estado de mercancía" text="Estado de mercancía" />
+                            </ComboBox>
+                        </fb:control>
+                    </fb:FilterGroupItem>
+
+                    <fb:FilterGroupItem
+                        groupName="__$INTERNAL$"
+                        name="TipoItem"
+                        label="Tipo Item"
+                        visibleInFilterBar="true">
+                        <fb:control>
+                            <ComboBox id="TipoItemCB" 
+                                    items="{/tiposDeItem}"
+                                    selectedKey="{filtros>/tipoItemSeleccionado}">
+                                
+                                <core:ListItem key="{key}" text="{text}" icon="{icon}" />
+
+                            </ComboBox>
+                        </fb:control>
+                    </fb:FilterGroupItem>
+                    
+                    <fb:FilterGroupItem 
+                      groupName="__$INTERNAL$"
+                      name="DocCompra" 
+                      label="Documento de compra" 
+                      visibleInFilterBar="true">
+                      <fb:control>
+                          <MultiInput
+                              showSuggestion="false" 
+                              width="70%"    
+                              showValueHelp="false" 
+                              tokenUpdate=".onTokenUpdate"/>
+                      </fb:control>
+                  </fb:FilterGroupItem>
+
+                </fb:filterGroupItems>
+                <Toolbar >
+                    <ToolbarSpacer /> <!-- Empuja el botón a la derecha -->
+                    <Button text="Buscar" press=".onSearch"/>
+                </Toolbar>
+            </fb:FilterBar>
+
+
+          <List
+    id="productsList"
+    items="{itemsModel>/items}"
+    noDataText="Sin datos">
+
+
+<CustomListItem class="listItemPadding">
+    <HBox justifyContent="SpaceBetween" alignItems="Center" fitContainer="true">
+        
+        <!-- Columna izquierda: información -->
+        <VBox>
+            <Title text="{itemsModel>id}" level="H3"/>
+            <Text text="Número de contrato: {itemsModel>numeroContrato}"/>
+            <Text text="Fecha de creación: {itemsModel>fechaCreacion}"/>
+            <Text text="MA01: {itemsModel>MA01}"/>
+        </VBox>
+
+        <!-- Columna derecha: botones -->
+        <VBox alignItems="End">
+            <Button text="Histórico"
+                    type="Emphasized"
+                    press=".onHistoricoPress"
+                    class="sapUiSizeLarge"
+                    width="8rem"/>
+            
+            <HBox alignItems="Center" justifyContent="Start" class="servicesHBox">
+                <core:Icon src="sap-icon://settings" size="0.8rem"/>
+                <Link text="Servicios" press=".onServiciosPress" class="linkText sapUiTinyMarginBegin"/>
+            </HBox>
+        </VBox>
+
+    </HBox>
+</CustomListItem>
+</List>
+
+
+        </VBox>
+    </Page>
+</mvc:View>
