@@ -1,0 +1,115 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:fb="sap.ui.comp.filterbar">
+
+    <Dialog id="historicoDialog"
+            
+            showHeader="false"
+            >
+
+        <VBox alignItems="Center" class="sapUiTinyMargin">
+            <Title text="Histórico de propuestas" level="H3" />
+        </VBox>
+        
+        <VBox class="grayBackground borderedVBox" width="100%">
+            <Text text="EDPs" class="blueText"/>
+        </VBox>
+
+        <fb:FilterBar
+                id="filterbar2"
+                persistencyKey="myFilterBarPersistenceKey"
+                useToolbar="false"
+                search=".onSearch"
+                clear=".onClear"
+                showGoOnFB="false"
+                class=""
+                showFilterConfiguration="false">
+
+                <fb:filterGroupItems>
+
+                <fb:FilterGroupItem 
+                      groupName="__$INTERNAL$"
+                      name="numeroEDP" 
+                      visibleInFilterBar="true">
+                      <fb:control>
+                          <MultiInput
+                              showSuggestion="false"   
+                              showValueHelp="false" 
+                              tokenUpdate=".onTokenUpdate"
+                              placeholder="Número de EDP"
+                              />
+                      </fb:control>
+                  </fb:FilterGroupItem>
+
+                    <fb:FilterGroupItem 
+                        name="FechaCreacion" 
+                        groupName="__$INTERNAL$"
+                        id="72" 
+                        visibleInFilterBar="true">
+                        <fb:control>
+                            <DateRangeSelection id="Date2" displayFormat="yyyy/MM/dd" />
+                        </fb:control>
+                    </fb:FilterGroupItem>
+
+
+                    <fb:FilterGroupItem
+                        groupName="__$INTERNAL$"
+                        name="Estado"
+                        visibleInFilterBar="true">
+                        <fb:control>
+                            <ComboBox id="EstadoCB2" selectedKey="Todos">
+                                <core:Item key="Todos" text="Todos" />
+                                <core:Item key="Validado" text="Validado" />
+                                <core:Item key="Rechazado" text="Rechazado" />
+                            </ComboBox>
+                        </fb:control>
+                    </fb:FilterGroupItem>
+                    
+
+
+
+
+                </fb:filterGroupItems>
+            </fb:FilterBar>
+
+        <List
+            id="historicoList"
+            items="{hItems>/items}"
+            noDataText="Sin datos">
+
+                    <!-- CARDS -->
+                <CustomListItem class="listItemPadding">
+                    <HBox justifyContent="SpaceBetween" alignItems="Center" fitContainer="true">
+                        
+                        <!-- Columna izquierda: información -->
+                        <VBox justifyContent="Start" alignItems="Start">
+                            <HBox alignItems="Start">
+                                <Title text="{hItems>id}" level="H3"/>
+                            </HBox>
+                            <Text text="EDP para la órden de compra {hItems>edpOC}" />
+                            <Text text="{hItems>fecha}"/>         
+                        </VBox>
+
+
+                        <VBox alignItems="End">
+                            <Title text="{path: 'hItems>monto', formatter: '.formatter.formatMonto'}" level="H3"/>
+                            <Text text="{hItems>currency}" class="grayText"/>
+                            <ObjectStatus
+                            text="{path: 'hItems>estado', formatter: '.formatter.displayEstado'}"
+                            state="{path: 'hItems>estado', formatter: '.formatter.estadoColor'}" />
+                        </VBox>
+
+                    </HBox>
+                </CustomListItem>
+            <!-- / CARDS -->
+
+
+        </List>
+
+        <endButton>
+            <Button text="Cerrar" press=".onCloseHistorico"/>
+        </endButton>
+
+    </Dialog>
+</core:FragmentDefinition>

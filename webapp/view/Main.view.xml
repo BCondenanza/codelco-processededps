@@ -30,14 +30,14 @@
                 useToolbar="false"
                 search=".onSearch"
                 clear=".onClear"
-                showGoOnFB="false"
+                showGoOnFB="true"
                 class="filterBar sapUiLargeMarginTop">
 
                 <fb:filterGroupItems>
                     <fb:FilterGroupItem 
                         name="FechaCreacion" 
                         label="Fecha de creación" 
-                        groupName="Group1"
+                        groupName="__$INTERNAL$"
                         id="7" 
                         visibleInFilterBar="true">
                         <fb:control>
@@ -92,48 +92,50 @@
                   </fb:FilterGroupItem>
 
                 </fb:filterGroupItems>
-                <Toolbar >
-                    <ToolbarSpacer /> <!-- Empuja el botón a la derecha -->
+                <!-- <Toolbar >
+                    <ToolbarSpacer /> 
                     <Button text="Buscar" press=".onSearch"/>
-                </Toolbar>
+                </Toolbar> -->
             </fb:FilterBar>
 
 
           <List
-    id="productsList"
-    items="{itemsModel>/items}"
-    noDataText="Sin datos">
+            id="propList"
+            items="{propItems>/items}"
+            noDataText="Sin datos">
+
+            <!-- CARDS -->
+                <CustomListItem class="listItemPadding">
+                    <HBox justifyContent="SpaceBetween" alignItems="Center" fitContainer="true">
+                        
+                        <!-- Columna izquierda: información -->
+                        <VBox>
+                            <Title text="{propItems>id}" level="H3"/>
+                            <Text text="Fecha de creación: {propItems>fechaCreacion}"/>
+                            <Text text="MA01: {propItems>MA01}"/>
+                            <Text text="Número de contrato: {propItems>numeroContrato}"/>          
+                        </VBox>
+
+                        <!-- Columna derecha: botones -->
+                        <VBox alignItems="End">
+                            <Button text="Histórico"
+                                    type="Emphasized"
+                                    press=".onHistoricoPress"
+                                    class="sapUiSizeLarge"
+                                    width="8rem"/>
+                            
+                            <HBox alignItems="Center" justifyContent="Start" class="servicesHBox">
+                                <core:Icon src="sap-icon://technical-object" size="0.8rem"/>
+                                <Link text="Servicios" press=".onServiciosPress" class="linkText sapUiTinyMarginBegin"/>
+                            </HBox>
+                        </VBox>
+
+                    </HBox>
+                </CustomListItem>
+            <!-- / CARDS -->
 
 
-<CustomListItem class="listItemPadding">
-    <HBox justifyContent="SpaceBetween" alignItems="Center" fitContainer="true">
-        
-        <!-- Columna izquierda: información -->
-        <VBox>
-            <Title text="{itemsModel>id}" level="H3"/>
-            <Text text="Número de contrato: {itemsModel>numeroContrato}"/>
-            <Text text="Fecha de creación: {itemsModel>fechaCreacion}"/>
-            <Text text="MA01: {itemsModel>MA01}"/>
-        </VBox>
-
-        <!-- Columna derecha: botones -->
-        <VBox alignItems="End">
-            <Button text="Histórico"
-                    type="Emphasized"
-                    press=".onHistoricoPress"
-                    class="sapUiSizeLarge"
-                    width="8rem"/>
-            
-            <HBox alignItems="Center" justifyContent="Start" class="servicesHBox">
-                <core:Icon src="sap-icon://settings" size="0.8rem"/>
-                <Link text="Servicios" press=".onServiciosPress" class="linkText sapUiTinyMarginBegin"/>
-            </HBox>
-        </VBox>
-
-    </HBox>
-</CustomListItem>
-</List>
-
+            </List>
 
         </VBox>
     </Page>

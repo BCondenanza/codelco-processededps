@@ -43,3 +43,21 @@
     font-size: 0.9rem;
     margin-top: 0.2rem;
 }
+
+.grayText{
+    color: gray;
+}
+
+.grayBackground {
+    background-color: #f0f0f0; /* gris claro */
+    padding: 0.5rem;
+}
+
+.blueText{
+    color: #0070f2;
+}
+
+.borderedVBox {
+    border-top: 1px solid #cccccc;   /* borde superior */
+    border-bottom: 1px solid #cccccc; /* borde inferior */
+}
